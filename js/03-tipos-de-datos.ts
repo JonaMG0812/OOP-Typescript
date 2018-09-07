@@ -25,3 +25,4 @@ console.log(cadena, numero, verdadero_falso, any, lenguajes, years);
 
 /*Creando mi tipo de dato personalizado, ejemplo: */
 type alfanumerico = string | number;
+
