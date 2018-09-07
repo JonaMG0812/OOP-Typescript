@@ -1,6 +1,26 @@
 /*Clase (Molde del objeto) */
-class camisa{
-    //Propiedades (caracteristicas del objeto
+
+//Interface
+interface camisaBase{
+    setColor(color);
+    getColor();
+}
+
+//Decorador
+function estampar(logo: string){
+    return function(target: Function){
+        target.prototype.estampacion = function():void{
+            console.log("Camisa estampada con el logo de: " + logo);
+        }
+    }
+}
+
+//Aplicando decorador
+@estampar("gucci Gang")
+
+//export class camisa{
+    class camisa implements camisaBase{
+    //Propiedades (caracteristicas del objeto)
     private color: string;
     private modelo: string;
     private marca: string;
@@ -33,16 +53,37 @@ class camisa{
 }
 
 //Utilizando el constructor
-var micamiseta = new camisa('rojo','polo', 'nike', 'L', 250);
+//var micamiseta = new camisa('rojo','polo', 'nike', 'L', 250);
 /*Llamando a metodos creados */
 //micamiseta.setColor("Verde");
 //micamiseta.getColor();
 
 /*Podmes crear nuevos objetos usando caracteristicas de otras clases */
 //Utilizando el constructor
-var playera =  new camisa('azul', 'cuello v', 'adidas', 'M', 350);
+//var playera =  new camisa('azul', 'cuello v', 'adidas', 'M', 350);
 /*Llamando a metodos creados */
 //playera.setColor("Azul");
 //playera.getColor();
 
-console.log(micamiseta, playera);
+//console.log(micamiseta, playera);
+
+//Clase Hija
+class sudadera extends camisa{
+    public capucha: boolean;
+
+    setCapucha(capucha: boolean){
+        this.capucha = capucha;
+    }
+
+    getCapucha(){
+        return this.capucha;
+    }
+}
+
+var micamiseta = new camisa('rojo','polo', 'nike', 'L', 250);
+console.log(micamiseta);
+micamiseta.estampacion();
+
+var misudadera = new sudadera('rojo','termica', 'puma', 'CH', 500);
+misudadera.setCapucha(true);
+console.log(misudadera);
